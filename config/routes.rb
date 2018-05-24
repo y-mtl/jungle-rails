@@ -15,6 +15,8 @@ Rails.application.routes.draw do
   namespace :admin do
     root to: 'dashboard#show'
     resources :products, except: [:edit, :update, :show]
+    resources :categories, only: [:index, :new, :create, :update]
+    #add :destroy in [] if it's required to have delete category from admin/categories
   end
 
   # The priority is based upon order of creation: first created -> highest priority.
