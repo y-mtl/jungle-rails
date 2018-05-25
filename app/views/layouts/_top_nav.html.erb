@@ -47,7 +47,7 @@
         <li class="login-out">
           <% if current_user %>
           <%= link_to "Logout", '/logout' %>
-          <% else %><%= console %>
+          <% else %>
             <%= link_to 'Login', '/login' %> | <%= link_to 'Signup', '/signup' %>
           <% end %>
         </li>

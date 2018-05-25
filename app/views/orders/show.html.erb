@@ -8,6 +8,29 @@
     <h4>Thank you for your order!</h4>
   </div>
 
+  <div class="panel panel-default items">
+    <table class="table table-bordered order">
+      <thead>
+        <tr>
+          <th colspan="3">Product</th>
+          <th class="col-xs-3 col-sm-3 col-md-1 col-lg-1">Quantity</th>
+          <th class="col-xs-3 col-sm-3 col-md-1 col-lg-1">Sub Total</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+        <%= render partial: 'line_item', collection: @line_items %>
+        </tr>
+      </tbody>
+      <tfoot>
+      </tfoot>
+    </table>
+  </div>
+  <ul class="product-total">
+    <li>Grand Total: <%= number_to_currency((@order.total_cents/100), :preciison => 2) %></li>
+    <li>Email: <%= @order.email %></li>
+  </ul>
+
   <%= link_to "Continue Shopping", root_path, class: 'btn btn-lg btn-primary' %>
 
 </section>

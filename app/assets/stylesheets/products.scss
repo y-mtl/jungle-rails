@@ -75,10 +75,6 @@ main section.categories-show {
   }
 }
 
-.navbar li.login-out a {
-  display: inline-block;
-}
-
 main section.products-show {
 
   .product-detail {
@@ -87,5 +83,39 @@ main section.products-show {
     }
   }
 }
+
+
+/* customized */
+
+.navbar li.login-out a {
+  display: inline-block;
+}
+
+// order page
+table.order {
+  thead tr, thead tr th {
+    text-align: center;
+  }
+  tbody tr, tbody tr td {
+    text-align: center;
+    vertical-align: middle;
+    &.product-desc {
+      text-align: left;
+    }
+    &.product-amount {
+      text-align: right;
+    }
+  }
+}
+
+ul.product-total {
+  float: right;
+  list-style: none;
+  li {
+    font-weight: bold;
+    text-align: right;
+  }
+}
+
 
 
