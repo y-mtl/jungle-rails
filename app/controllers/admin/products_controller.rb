@@ -1,6 +1,7 @@
 class Admin::ProductsController < ApplicationController
 
   def index
+    basic
     @products = Product.order(id: :desc).all
   end
 
@@ -25,7 +26,6 @@ class Admin::ProductsController < ApplicationController
   end
 
   private
-
   def product_params
     params.require(:product).permit(
       :name,
@@ -35,6 +35,13 @@ class Admin::ProductsController < ApplicationController
       :image,
       :price
     )
+  end
+
+  private
+  def basic
+    authenticate_or_request_with_http_basic do |user, pass|
+      user == Rails.configuration.admin[:user] && pass == Rails.configuration.admin[:password]
+    end
   end
 
 end

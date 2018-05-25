@@ -1,5 +1,7 @@
 class Admin::CategoriesController < ApplicationController
+
   def index
+    basic
     @categories = Category.order(id: :desc).all
   end
 
@@ -29,5 +31,13 @@ class Admin::CategoriesController < ApplicationController
       :name
     )
   end
+
+  private
+  def basic
+    authenticate_or_request_with_http_basic do |user, pass|
+      user == Rails.configuration.admin[:user] && pass == Rails.configuration.admin[:password]
+    end
+  end
+
 end
 
