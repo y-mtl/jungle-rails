@@ -29,6 +29,17 @@ cat1 = Category.find_or_create_by! name: 'Apparel'
 cat2 = Category.find_or_create_by! name: 'Electronics'
 cat3 = Category.find_or_create_by! name: 'Furniture'
 
+User.destroy_all
+
+5.times do
+  User.create({
+    firstname: Faker::Name.first_name,
+    lastname: Faker::Name.last_name,
+    email: Faker::Internet.email,
+    password_digest: Faker::Internet.password
+  })
+end
+
 ## PRODUCTS
 
 puts "Re-creating Products ..."
@@ -132,5 +143,24 @@ cat3.products.create!({
   price: 2_483.75
 })
 
+puts "Re-creating reviews..."
+
+## REVIEWS
+
+puts "Re-creating Reviews ..."
+
+Review.destroy_all
+
+products = Product.all
+
+products.each do |product|
+ 5.times do
+   product.reviews.create!({
+     rating:  Faker::Number.between(1, 5),
+     description: Faker::Hipster.sentence,
+     user_id: Faker::Number.between(1, 5),
+   })
+ end
+end
 
 puts "DONE!"
