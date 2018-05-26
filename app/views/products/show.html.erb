@@ -22,12 +22,46 @@
           <dd><%= @product.quantity %></dd>
           <dt>Price</dt>
           <dd><%= @product.price %></dd>
-          <dt>Review</dt>
-          <dd><%= @review.rating %></dd>
         </dl>
       </div>
     </div>
 
-  </article>
+    <% if current_user %>
+      <h2>Your Review</h2>
+      <div>
+        <dl class="dl-horizontal">
+        <%= form_for [@product, @review] do |f| %>
+        <dt><%= f.label :rating %></dt>
+        <dd><%= f.select(:rating, [1, 2, 3, 4, 5]) %></dd>
+        <dt><%= f.label :description %></dt>
+        <dd><%= f.text_area :description %></dd>
+        <dd><%= f.submit 'Send Review', class: 'btn btn-primary' %></dd>
+        <% end %>
+        </dl>
+      </div>
+    <% end %>
 
+    <h2>Reviews</h2>
+    <h3>Overall Rating: <%= (@product_rating).floor(1) %></h3>
+    <% flash.each do |key, value| %>
+      <div class="alert alert=<%= key %>"><%= value %> </div>
+    <% end %>
+    <div class="row">
+        <% @product.reviews.reverse.each do |review| %>
+        <div class="col-sm-8">
+          <dl class="dl-horizontal">
+            <dt>Rating</dt>
+            <dd><%= review.rating %></dd>
+            <dt>Review</dt>
+            <dd><%= review.description %></dd>
+            <% if current_user && current_user.id == review.user_id %>
+              <dd><%= link_to "Delete", product_review_path(@product, review), class: 'btn btn-primary', :method => :delete %></dd>
+            <% end %>
+          </dl>
+        </div>
+      <% end %>
+    </div>
+
+
+  </article>
 </section>
