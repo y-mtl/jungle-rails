@@ -5,14 +5,11 @@
   </header>
 
   <article class="product-detail">
-
     <div class="row">
-
-      <div class="col-sm-4">
+      <div class="col-sm-3">
         <%= image_tag @product.image.url, class: 'main-img' %>
       </div>
-
-      <div class="col-sm-8">
+      <div class="col-sm-9">
         <dl class="dl-horizontal">
           <dt>Name</dt>
           <dd><%= @product.name %></dd>
@@ -25,41 +22,53 @@
         </dl>
       </div>
     </div>
+  </article>
 
-    <% if current_user %>
-      <h2>Your Review</h2>
-      <div>
-        <dl class="dl-horizontal">
-        <%= form_for [@product, @review] do |f| %>
-        <dt><%= f.label :rating %></dt>
-        <dd><%= f.select(:rating, [1, 2, 3, 4, 5]) %></dd>
-        <dt><%= f.label :description %></dt>
-        <dd><%= f.text_area :description %></dd>
-        <dd><%= f.submit 'Send Review', class: 'btn btn-primary' %></dd>
-        <% end %>
-        </dl>
-      </div>
-    <% end %>
-
-    <h2>Reviews</h2>
-    <h3>Overall Rating: <%= (@product_rating).floor(1) %></h3>
-    <% flash.each do |key, value| %>
-      <div class="alert alert=<%= key %>"><%= value %> </div>
-    <% end %>
+  <article class="product-detail">
     <div class="row">
-        <% @product.reviews.reverse.each do |review| %>
-        <div class="col-sm-8">
-          <dl class="dl-horizontal">
-            <dt>Rating</dt>
-            <dd><%= review.rating %></dd>
-            <dt>Review</dt>
-            <dd><%= review.description %></dd>
-            <% if current_user && current_user.id == review.user_id %>
-              <dd><%= link_to "Delete", product_review_path(@product, review), class: 'btn btn-primary', :method => :delete %></dd>
-            <% end %>
-          </dl>
-        </div>
+      <div class="col-sm-3">
+      <h2>Reviews <br /><span>Overall Rating: <%= (@product_rating).floor(1) %></span></h2>
+      <% if current_user %>
+          <h3>You review</h3>
+          <div>
+            <ul>
+            <%= form_for [@product, @review] do |f| %>
+              <li>
+                <%= f.label :rating %>
+                <%= f.select(:rating, [1, 2, 3, 4, 5]) %>
+              </li>
+              <li>
+                <%= f.label :description %><br />
+                <%= f.text_area :description %>
+              </li>
+              <li>
+                <%= f.submit 'Send Review', class: 'btn btn-info' %>
+              </li>
+              <% end %>
+            </ul>
+          </div>
+        <% end %>
+      </div>
+      <div class="col-sm-9 review-details">
+      <% flash.each do |key, value| %>
+        <div class="alert alert=<%= key %>"><%= value %> </div>
       <% end %>
+        <div class="row">
+            <% @product.reviews.reverse.each do |review| %>
+            <div class="col-sm-8">
+              <dl class="dl-horizontal">
+                <dt>Rating</dt>
+                <dd><%= review.rating %></dd>
+                <dt>Review</dt>
+                <dd><%= review.description %></dd>
+                <% if current_user && current_user.id == review.user_id %>
+                  <dd><%= link_to "Delete", product_review_path(@product, review), class: 'btn-custom', :method => :delete %></dd>
+                <% end %>
+              </dl>
+            </div>
+          <% end %>
+        </div>
+      </div>
     </div>
 
 
