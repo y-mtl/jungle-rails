@@ -12,16 +12,10 @@ class NotificationMailer < ApplicationMailer
 
   #   mail to: 'to_okutani@example.com', subject: 'ActionMailerのテスト送信'
   # end
-  def show
-      @order = Order.find(params[:id])
-      @line_items = @order.line_items
-  end
 
- def send_message(user_name, user_email, order, total_amount)
-      @user_name = user_name
+ def send_message(order)
       @order = order
-      @total_amount = total_amount
-      mail(to: 'test@test.com', subject: 'Your order confirmation. {@order.id}')
+      mail(to: 'test@test.com', subject: 'Order Confirmation: #{@order.id}')
   end
 
 end

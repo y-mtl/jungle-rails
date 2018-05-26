@@ -4,77 +4,19 @@
     <meta content='text/html; charset=UTF-8' http-equiv='Content-Type' />
   </head>
 <body>
-<h1>Hello, <%= @user_name %> </h1>
-<p>
-  Thank you for your purchase.<br>
-  Here is your purchase records:
-</p>
-<p>Order: <%= @order %></p>
+  <h1>Hello, Customer!</h1>
+  <p>
+    Thank you for your purchase. Here is the confirmation of your order.
+  </p>
 
-<table>
-  <tr>
-    <td>Product: </td>
-    <td>Item Price</td>
-    <td>Quantity</td>
-    <td>Total_price</td>
-  </tr>
-
-
-  <tr>
-    <td>Total amount:</td>
-    <td></td>
-  </tr>
-
-</table>
-
-<p>
-  Thank you again for your purchase!
-</p>
-</html>
-
-<!-- The above is from @order needs to work  -->
-<!DOCTYPE html>
-<html>
-  <head>
-    <meta content='text/html; charset=UTF-8' http-equiv='Content-Type' />
-  </head>
-<body>
-<h1>Hello <%= @user_name %>,</h1>
-<p>
-  Thank you for your purchase.<br>
-  Here is your purchase records:
-</p>
-<p>Order: <%= @order.id %></p>
-
-<table>
-  <tr>
-    <td>Product: </td>
-    <td>Item Price</td>
-    <td>Quantity</td>
-    <td>Total_price</td>
-  </tr>
-
-  <% items = LineItem.where(order_id: @order.id) %>
-  <% items.each do |item| %>
-    <% product = Product.find_by(id: item.product_id) %>
-    <tr>
-      <td><%= product.name %></td>
-      <td><%= item.item_price %></td>
-      <td><%= item.quantity %></td>
-      <td><%= item.total_price %></td>
-    </tr>
+  <ul>
+  <% @order.line_items.each do |line_item| %>
+    <% if product = Product.find_by(id: line_item.product_id) %>
+      <li>Item: <%= product.name %></li>
+      <li>Quantity: <%= line_item.quantity %></li>
+      <li>Total: <%= product.price * line_item.quantity %></li>
+    <% end %>
   <% end %>
-
-  <tr>
-    <td>Total amount:</td>
-    <td><%= @total_amount %></td>
-  </tr>
-
-</table>
-
-<p>
-  Thank you again for your purchase!
-</p>
+  </ul>
+</body>
 </html>
-<!-- これはメール送信のテストです。
-<%= #@greeting %>, <%= #@name %>! -->
