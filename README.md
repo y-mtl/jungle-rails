@@ -2,7 +2,6 @@
 
 A mini e-commerce application built with Rails 4.2 for purposes of teaching Rails by example.
 
-
 ## Setup
 
 1. Fork & Clone
@@ -15,11 +14,18 @@ A mini e-commerce application built with Rails 4.2 for purposes of teaching Rail
 8. Put Stripe (test) keys into appropriate .env vars
 9. Run `bin/rails s -b 0.0.0.0` to start the server
 
+## Screenshot
+![Index page](https://raw.githubusercontent.com/y-mtl/jungle-rails/master/docs/jungle1.png)
+![Singup page](https://raw.githubusercontent.com/y-mtl/jungle-rails/master/docs/jungle2.png)
+![Login page](https://raw.githubusercontent.com/y-mtl/jungle-rails/master/docs/jungle3.png)
+![Signup page](https://raw.githubusercontent.com/y-mtl/jungle-rails/master/docs/jungle3.5.png)
+![Shopping Cart no item](https://raw.githubusercontent.com/y-mtl/jungle-rails/master/docs/jungle4.png)
+![Shopping Cart](https://raw.githubusercontent.com/y-mtl/jungle-rails/master/docs/jungle5.png)
+![Order confirmation](https://raw.githubusercontent.com/y-mtl/jungle-rails/master/docs/jungle6.png)
+![Admin page](https://raw.githubusercontent.com/y-mtl/jungle-rails/master/docs/jungle7.png)
 ## Stripe Testing
 
-Use Credit Card # 4111 1111 1111 1111 for testing success scenarios.
-
-More information in their docs: <https://stripe.com/docs/testing#cards>
+As for test card info, please visit their docs: <https://stripe.com/docs/testing#cards>
 
 ## Dependencies
 
